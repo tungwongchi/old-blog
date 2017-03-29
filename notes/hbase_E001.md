@@ -1,5 +1,7 @@
 environment：
+<pre>
 hadoop-0.21.0、hbase-0.20.6
+</pre>
 
 error info: 
 <pre>
@@ -17,7 +19,9 @@ java.io.EOFException
 </pre>
 
 root cause and solution: 
+<pre>
 版本的问题，hadoop-0.20.2 搭配hbase-0.20.6比较稳当。
+</pre>
 
 reference:
 [HBase入门篇](http://www.uml.org.cn/sjjm/201212141.asp)
