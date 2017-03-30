@@ -10,7 +10,8 @@ Hadoop版本兼容情况
   0.12.0    0.20.x, 0.23.x.y, 1.x.y, 2.x.y
   0.11.0    0.20.x, 0.23.x.y, 1.x.y, 2.x.y
   0.10.0    0.20.x, 0.23.x.y, 1.x.y, 2.x.y
-  
+</pre>
+
 2. [hadoop与HBase版本对应关系](http://hbase.apache.org/book.html#hadoop)
 <pre>
   Hbase     Hadoop
