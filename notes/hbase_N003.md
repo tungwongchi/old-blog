@@ -40,5 +40,4 @@ hadoop1.2+hbase0.95.0+hive0.11.0 会产生hbase+hive的不兼容，创建hive+hb
 hadoop1.2+hbase0.94.9+hive0.10.0没问题，解决了上个版本的不兼容问题。
 hadoop-1.0.3+hive-0.9.0+hive0.92.0兼容
 hadoop2.2+hbase0.96+hive0.12兼容(有些小问题，可能需要一些补丁)
-hadoop2.2+hbase0.96+hive0.13兼容(应该兼容)
 </pre>
