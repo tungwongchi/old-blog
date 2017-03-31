@@ -16,8 +16,8 @@ HBaseConfiguration是每一个hbase client都会使用到的对象，它代表�
 默认的构造方式会尝试从hbase-default.xml和hbase-site.xml中读取配置。如果classpath没有这两个文件，
 就需要你自己设置配置。
   Configuration HBASE_CONFIG = new Configuration();
-  HBASE_CONFIG.set(“hbase.zookeeper.quorum”, “zkServer”);
-  HBASE_CONFIG.set(“hbase.zookeeper.property.clientPort”, “2181″);
+  HBASE_CONFIG.set("hbase.zookeeper.quorum", "zkServer");
+  HBASE_CONFIG.set("hbase.zookeeper.property.clientPort","2181");
   HBaseConfiguration cfg = new HBaseConfiguration(HBASE_CONFIG);
 
 3. 创建表
@@ -37,10 +37,10 @@ HColumnDescriptor 代表的是column的schema，提供的方法比较常用的�
 一个简单的例子，创建了4个family的表：
   HBaseAdmin hAdmin = new HBaseAdmin(hbaseConfig);
   HTableDescriptor t = new HTableDescriptor(tableName);
-  t.addFamily(new HColumnDescriptor(“f1″));
-  t.addFamily(new HColumnDescriptor(“f2″));
-  t.addFamily(new HColumnDescriptor(“f3″));
-  t.addFamily(new HColumnDescriptor(“f4″));
+  t.addFamily(new HColumnDescriptor("f1"));
+  t.addFamily(new HColumnDescriptor("f2"));
+  t.addFamily(new HColumnDescriptor("f3"));
+  t.addFamily(new HColumnDescriptor("f4"));
   hAdmin.createTable(t);
 
 4. 删除表
@@ -120,12 +120,12 @@ Example:
   byte[] buffer = new byte[1024];
   Random r = new Random();
   for (int i = 1; i <= count; ++i) {
-    Put p = new Put(String.format(“row%09d”,i).getBytes());
+    Put p = new Put(String.format("row%09d",i).getBytes());
     r.nextBytes(buffer);
-    p.add(“f1″.getBytes(), null, buffer);
-    p.add(“f2″.getBytes(), null, buffer);
-    p.add(“f3″.getBytes(), null, buffer);
-    p.add(“f4″.getBytes(), null, buffer);
+    p.add("f1".getBytes(), null, buffer);
+    p.add("f2".getBytes(), null, buffer);
+    p.add("f3".getBytes(), null, buffer);
+    p.add("f4".getBytes(), null, buffer);
     p.setWriteToWAL(wal);
     lp.add(p);
     if(i%1000==0){
@@ -145,8 +145,8 @@ Delete常用方法有
   deleteFamily/deleteColumns:指定要删除的family或者column的数据。如果不调用任何这样的方法，将会删除整行。
   注意：如果某个Cell的timestamp高于当前时间，这个Cell将不会被删除，仍然可以查出来。
 Example:
-  HTable table = new HTable(hbaseConfig, “mytest”);
-  Delete d = new Delete(“row1″.getBytes());
+  HTable table = new HTable(hbaseConfig, "mytest");
+  Delete d = new Delete("row1".getBytes());
   table.delete(d) 
 
 8. 切分表
@@ -157,8 +157,8 @@ HBaseAdmin提供split方法来将table 进行split.
 Example:
   public void split(String tableName,int number,int timeout) throws Exception {
     Configuration HBASE_CONFIG = new Configuration();
-    HBASE_CONFIG.set(“hbase.zookeeper.quorum”, GlobalConf.ZOOKEEPER_QUORUM);
-    HBASE_CONFIG.set(“hbase.zookeeper.property.clientPort”, GlobalConf.ZOOKEEPER_PORT);
+    HBASE_CONFIG.set("hbase.zookeeper.quorum", GlobalConf.ZOOKEEPER_QUORUM);
+    HBASE_CONFIG.set("hbase.zookeeper.property.clientPort", GlobalConf.ZOOKEEPER_PORT);
     HBaseConfiguration cfg = new HBaseConfiguration(HBASE_CONFIG);
     HBaseAdmin hAdmin = new HBaseAdmin(cfg);
     HTable hTable = new HTable(cfg,tableName);
@@ -166,7 +166,7 @@ Example:
     t =  System.currentTimeMillis();
     while(true){
       int size = hTable.getRegionsInfo().size();
-      logger.info(“the region number=”+size);
+      logger.info("the region number="+size);
       if(size>=number ) 
         break;
       if(size!=oldsize){
