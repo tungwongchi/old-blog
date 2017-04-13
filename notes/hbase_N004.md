@@ -30,9 +30,13 @@
 21. HFile的数据块大小是在列族层次设置的, 默认64KB. 数据块索引存储着HFile的起始位置. 数据块越小,
   索引越大, 利于随机读取, 占用内存越多. 反之更利于顺序读取.
 22. 列族设置参数IN_MEMORY, 可以使所属数据块获得更高优先级的缓存, 但并不会获得比其他列族更高的额外保证.
-22. 列族设置参数BOOLMFILTER, 通过额外索引存储可以获得行数据不在该数据块或未知的反向测试能力. 
+23. 列族设置参数BOOLMFILTER, 通过额外索引存储可以获得行数据不在该数据块或未知的反向测试能力. 
   设置为ROW可以检测特定行键, 设置为ROWCOL则会检查行和列限定符组合. 所以ROW占用空间和开销都要小于ROWCOL.
-23. 列族设置参数TTL, 秒级生存时间. 超过时间的数据被自动标记删除, major compaction时会删除早于TTL的数据. 
-23. 列族设置参数COMPRESSION, 数据存储压缩, 支持GZIP/SNAPPY/LZO. LZO需自行安装库. 压缩只针对硬盘数据.
-23. 列族设置参数MIN_VESIONS, 保存最少版本个数. 即使超过TTL也可能因此被保留下来.
+24. 列族设置参数TTL, 秒级生存时间. 超过时间的数据被自动标记删除, major compaction时会删除早于TTL的数据. 
+25. 列族设置参数COMPRESSION, 数据存储压缩, 支持GZIP/SNAPPY/LZO. LZO需自行安装库. 压缩只针对硬盘数据.
+26. 列族设置参数MIN_VESIONS, 保存最少版本个数. 即使超过TTL也可能因此被保留下来.
+27. 对org.apache.hadoop.hbase.filter.Filter的实现类FilterBase或其他实现类进行扩展. 返回true为过滤,
+  会使RegionServer过滤掉不向客户端发送. 定制过滤器需要重启RegionServer来加载定制过的类或JAR包才可使用.
+  HBase预装了RowFilter行过滤器, PrefixFilter前缀过滤器, QualifierFilter列限制名过滤器, ValueFilter值过滤器, 
+  TimestampsFilter时间戳过滤器等. 可以用FilterList组合多个过滤器使用. 
 </pre>
