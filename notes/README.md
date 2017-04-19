@@ -15,4 +15,6 @@ Hadoop
 <br/>
 [Hadoop版本兼容情况](https://github.com/darkdown/blog/blob/master/notes/hadoop_N001.md),
 <br/>
-
+Solr
+<br/>
+[用Solr构建垂直搜索引擎](https://github.com/darkdown/blog/blob/master/notes/solr_N001.md)
