@@ -17,4 +17,4 @@ Hadoop
 <br/>
 Solr
 <br/>
-[Apache Solr4 Cookbook](https://github.com/darkdown/blog/blob/master/notes/solr_N001.md)
+[apache solr ref guide](https://github.com/darkdown/blog/blob/master/notes/solr_N001.md)
