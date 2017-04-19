@@ -14,3 +14,7 @@ HBASE
 Hadoop
 <br/>
 [Hadoop版本兼容情况](https://github.com/darkdown/blog/blob/master/notes/hadoop_N001.md),
+<br/>
+Solr
+<br/>
+[Apache Solr4 Cookbook](https://github.com/darkdown/blog/blob/master/notes/solr_N001.md)
