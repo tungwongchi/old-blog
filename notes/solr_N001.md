@@ -1,5 +1,6 @@
 参考：
   [用Solr构建垂直搜索引擎](https://fliaping.gitbooks.io/create-your-vertical-search-engine-with-solr/content/introduction-of-vertical-search-engine.html)
+  [solr学习之五-选用合适的类型](http://blog.csdn.net/zl3450341/article/details/12850947)
   
 <pre>
 1. 搜索引擎按其工作方式主要可分为三种, 分别是全文搜索引擎(Full Text Search Engine), 
@@ -150,4 +151,7 @@
   Replica: Shard的一个拷贝, 每个Replica存在于Solr的一个Core中
   Leader: 赢得选举的Shard replicas
   Zookeeper: 提供分布式锁功能
+26. 数据类型采用: SortableIntField, SortableLongField, SortableFloatField, SortableDoubleField, 
+  IntField, LongField, FloatField, DoubleField
+  频繁的在数值类型上执行范围查询, 建议采用: TrieField.
 </pre>
