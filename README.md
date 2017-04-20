@@ -3,7 +3,7 @@ notes and blogs. Please give credit to the original author when you use it elsew
 
 [notes](https://github.com/darkdown/blog/tree/master/notes)
 <pre>
-Java, Hadoop, HBase
+Java, Hadoop, HBase, Solr
 </pre>
 [blogs](https://github.com/darkdown/blog/tree/master/blogs)
 <pre>
