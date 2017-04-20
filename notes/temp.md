@@ -4,7 +4,6 @@
 
 2. temp notes
 
-[Solr学习](http://blog.csdn.net/zl3450341/article/details/12803189)
 <pre>
 java通过class中间编译的方式实现平台无关性, 面向对象的解释型语言, 内存自动管理.
 数据类型: 基础类型, 引用类型(class, interface, array)
