@@ -26,4 +26,6 @@ java通过class中间编译的方式实现平台无关性, 面向对象的解释
 ||
 ?:
 =
+
+http://blog.csdn.net/zl3450341/article/details/12803189
 <pre>
