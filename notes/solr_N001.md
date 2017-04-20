@@ -22,8 +22,8 @@
   licenses: 许可相关
   server: 是solr自带的jetty
 4. SolrHome是solr运行的主目录, 包含多个SolrCore目录. SolrCore目录中就solr实例的运行配置文件和数据文件.
-5. solr5.0+开始官方不再支持Tomcat的集成. ${solr}/server/lib/ext中的jar全部复制到
-  ${tomcat}/webapps/solr/WEB-INF/lib 目录中. 将${solr}/server/solr-webapp/WEB-INF下
+5. solr5.0+开始官方不再支持Tomcat的集成. ${solr_home}/server/lib/ext中的jar全部复制到
+  ${tomcat}/webapps/solr/WEB-INF/lib 目录中. 将${solr_home}/server/solr-webapp/WEB-INF下
   web.xml中<env-entry-value>中的内容改成你的${solr_home}路径.
 6. 在${solr_home}目录下创建自定义SolrCore目录, ${solr_home}/configsets/basic_configs/目录下
   的conf目录复制到自定义SolrCore目录下
@@ -91,5 +91,63 @@
   支持英文字母, 数字, 中文词汇等分词处理, 兼容韩文, 日文字符. 
   paoding: 中文分词具有极高效率和高扩展性. 引入隐喻, 采用完全的面向对象设计, 构思先进.
 14. solr集成mmseg4j: 引入jar包并运行bin/solr create -c trip, 配置managed-schema
-  
+15. 空间搜索(Spatial Search): 对Point(经纬度)和几何图形建索引. 距离计算. 查找某些特定区域内所有匹配项.
+  根据到固定点的距离对搜索结果进行排序. 使用距离作为记录中的增强因素, 同时允许其他因素发挥作用.   创建可用于
+  根据索引数据进行搜索的编码表示.
+16. 在Solr中空间搜索主要基于GeoHash和Cartesian Tiers 2个概念来实现. GeoHash即使用hash算法的方法对地理信息进行编码.
+17. 二分编码: 对区间进行二分为左右区间, 属于右区间为1, 否则为0. 以此递归. 生成二进制编码. 
+  组码和Base32编码: 二分编码后按5位一组转换10进制, 然后进行base32
+18. 用代码构建空间搜索索引: 
+  doc.setField("poi_location_p", "32.52162,120.31778") //point类型
+  doc.setField("poi_location_p", "POLYGON((120.35330414772034 31.58268495951037,
+    120.35190939903259 31.57923921490961, 120.35330414772034 31.58268495951037))") //多边形类型
+19. 数据导入:
+  需要引入solr-dataimporthandler.jar
+  在${solr_home}/conf/solrconfig.xml中配置数据导入功能:
+    <requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">
+      <lst name="defaults">
+        <str name="config">data-config.xml</str>
+      </lst>
+    </requestHandler>
+  创建data-config.xml: 
+    <?xml version="1.0" encoding="UTF-8" ?>
+    <dataConfig>   
+      <dataSource /> 
+      <document>   
+        <entity>
+          <field/> 
+          ...
+        </entity>   
+      </document>   
+    </dataConfig>
+  然后进入管理界面进行数据导入
+20. Solr默认有三种查询解析器: 
+  Standard Query Parser, DisMax Query Parser, Extended DisMax Query Parser (eDisMax)
+21. Solr查询参数: defType-选择查询解析器类型. q-主查询参数. sort-排序. start-分页的起始的数据偏移offset.
+  raws-分页每页返回的数量. fq-(filter query)返回结果的过滤查询. fl-(fields to list)返回的字段. 
+  wt-(response writer)返回的响应格式. timeAllowed-超时时间. hl-是否高亮. hl.fl-字段高亮. 
+  hl.snippets-片段数, 默认是1. hl.simple.pre-高亮前面的格式. hl.simple.post-高亮后面的格式.
+  facet-是否启动统计. facet.field-统计字段.
+  以下是DisMax Parser参数扩展: qf-(query fields)指定查询的字段. mm-最小匹配比例. 
+    pf-phrase fields. ps-phrase slop. qs-query phrase slop.
+22. 使用solrj: 引用apache-solr-solrj.jar, commons-codec-1.3.jar, commons-httpclient-3.1.jar,
+  commons-io-1.4.jar, jcl-over-slf4j-1.5.5.jar, slf4j-api-1.5.5.jar, slf4j-jdk14-1.5.5.jar
+  常用类: HttpSolrClient, solrQuery, QueryResponse
+23. hybrid app: 一种使用webview构建, 另一种构建第三语言平台
+  优点: 开发人员可以使用现有的网页技术, 对于多种平台使用一套基础代码, 减少开发时间和成本,
+    使用响应式网页设计可以非常简便的设计出多样的元素(包括平板), 一些设备和操作系统特征的访问,
+    高级的离线特性, 可见度上升(因为app可以原生发布, 也可以发布给移动端浏览器.
+  缺点: 某些特定app的性能问题, 为了模拟native app的UI和感官所增加的时间和精力,
+    并不完全支持所有的设备和操作系统, 如果app的体验并不够原生化
+24. Ionic是一个强大的 HTML5 应用程序开发框架, 基于Angular语法, 专注原生, 提供了强大的命令行工具, 性能优越
+25. SolrCloud
+  Cluster集群: Cluster是一组Solr节点, 逻辑上作为一个单元进行管理, 整个集群必须使用同一套schema和SolrConfig
+  Node节点: 一个运行Solr的JVM实例
+  Collection: 在SolrCloud集群中逻辑意义上的完整的索引, 常常被划分为一个或多个Shard(使用相同的Config Set)
+  Solr Core: 可以独立提供索引和查询功能, Solr Core的提出是为了增加管理灵活性和共用资源
+  Config Set: Solr Core提供服务必须的一组配置文件, 最小需要包括solrconfig.xml和schema.xml
+  Shard分片: Collection的逻辑分片, 每个Shard被分成一个或者多个replicas, Replicas需要选举来确定一个Leader
+  Replica: Shard的一个拷贝, 每个Replica存在于Solr的一个Core中
+  Leader: 赢得选举的Shard replicas
+  Zookeeper: 提供分布式锁功能
 </pre>
