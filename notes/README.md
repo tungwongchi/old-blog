@@ -2,7 +2,7 @@
 Java
 <br/>
 [Effective Java](https://github.com/darkdown/blog/blob/master/notes/java_N001.md), 
-[SAX与DOM]((https://github.com/darkdown/blog/blob/master/notes/java_N002.md)
+[SAX与DOM](https://github.com/darkdown/blog/blob/master/notes/java_N002.md)
 <br/>
 HBASE
 <br/>
