@@ -1,5 +1,5 @@
 参考：
-  [用Solr构建垂直搜索引擎](https://fliaping.gitbooks.io/create-your-vertical-search-engine-with-solr/content/introduction-of-vertical-search-engine.html)
+  [用Solr构建垂直搜索引擎](https://fliaping.gitbooks.io/create-your-vertical-search-engine-with-solr/content/introduction-of-vertical-search-engine.html), 
   [solr学习之五-选用合适的类型](http://blog.csdn.net/zl3450341/article/details/12850947)
   
 <pre>
