@@ -21,4 +21,10 @@
 8. equals方法返回true时, hashCode返回值必须相同. 反之, equals方法返回true时, hashCode并非一定不一致.
 9. 好的hashCode方法会提高在hash表中存取的性能. 反之, 可能会使得hash表退化成链表.
 10. java1.5+提供协变返回类型作为泛型, 就是重写方法的返回值可以是被覆盖方法的子类
+11. Comparable对于大于, 小于, 等于分别返回负数, 零, 正数. 无法比较抛出ClassCastException. 
+12. Comparable实现约定: 必须确保满足sgn(x.compareTo(y))与-sgn(y.compareTo(x))相等. 具有传递性. 确保x.compareTo(y)为0时,
+    sgn(x.compareTo(z))与sgn(y.compareTo(z))是恒等的. 最好当x.compareTo(y)为0时, 使x.equals(y)成立.
+13. 在无法保障Comparable约定时, 可以通过Comparator实现排序功能.
+14. 封装: 尽量减少数据访问权限, 降低耦合.
+15. 不可变类: 不提供改变对象状态的方法. 不可扩展. 不可提供可变属性引用.
 </pre>
