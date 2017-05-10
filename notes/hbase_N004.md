@@ -39,4 +39,15 @@
   会使RegionServer过滤掉不向客户端发送. 定制过滤器需要重启RegionServer来加载定制过的类或JAR包才可使用.
   HBase预装了RowFilter行过滤器, PrefixFilter前缀过滤器, QualifierFilter列限制名过滤器, ValueFilter值过滤器, 
   TimestampsFilter时间戳过滤器等. 可以用FilterList组合多个过滤器使用. 
+28. 部署于服务器端的协处理器(observer, endpoint)难以调试, 并且有可能影响服务器运行. 服务器不会对协处理器的
+  错误给出提示, 即使是部署错误.
+29. observer处于客户端和HBase之间, 类似与关系数据库中的触发器. 实现可以继承BaseRegionObserver.
+30. RegionObserver在数据访问和操作阶段运行, 可以通过模式更新或hbase.coprocessor.region.classes配置.
+31. WALObserver在预写日志阶段运行, 可以通过模式更新或hbase.coprocessor.wal.classes配置.
+32. MasterObserver在DDL语句阶段运行, 可以通过模式更新或hbase.coprocessor.master.classes配置.
+33. endpoint可以扩展RPC协议, 是一种通用扩展方法. 类似关系数据库中的存储过程. 实现可以扩展CoprocessorProtocol,
+  并且实现相应的客户端代码.
+34. HBase除了原生java客户端外, 还支持shell, jruby, rest服务, thrift服务, asynchbase(java异步客户端)
+35. OpenTSDB是一种基于HBase来构建的分布式, 可扩展的时间序列数据库. 解决了基础设施监控的问题.
+36. OpenTSDB中tsdb表提供时间序列数据的存储和查询支持, tsdb-uid表维护一个全局唯一值索引.
 </pre>
