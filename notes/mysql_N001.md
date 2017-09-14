@@ -2,8 +2,7 @@
   [Effective MySQL: Optimizing SQL Statements](http://effectivemysql.com/book/optimizing-sql-statements/)
 
 <pre>
-1. show full processlist(mysql 5.1.7以后可以使用SELECT * FROM INFORMATION_SCHEMA.PROCESSLIST) 
-可以查询系统运行的sql情况.
+1. show full processlist(5.1.7以后可以查看INFORMATION_SCHEMA.PROCESSLIST表)可以查询系统运行的sql情况.
 2. 重复执行确认sql效率低下, 而不是锁表或其它系统原因导致(如果是更新语句需要重写为查询语句来验证).
 3. show create table 查看表结构情况.
 4. alter语句为阻塞操作, 会阻塞包括查询在内的所有操作.
