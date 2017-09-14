@@ -19,3 +19,7 @@ Hadoop
 Solr
 <br/>
 [用Solr构建垂直搜索引擎](https://github.com/darkdown/blog/blob/master/notes/solr_N001.md)
+MySQL
+<br/>
+[Effective MySQL之SQL语句最优化](https://github.com/darkdown/blog/blob/master/notes/mysql_N001.md), 
+<br/>
